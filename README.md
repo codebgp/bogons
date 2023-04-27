@@ -14,7 +14,7 @@ Furthermore, it applies them to bird's default configuration file (bird.conf) as
 The script without any arguments (e.g. `./bogons-sync-ripe.sh`), outputs 4 files: ASN numbers in the form of ranges (`asn-ranges-ripe-sorted.txt`), and IPv4/IPv6 prefixes in various formats (`ipv4-cidr-merged-ripe.txt`, `ipv4-ranges-ripe.txt` and `ipv6-cidr-merged-ripe.txt`), allowing the user to feed the script's output in the routing daemon of choice.
 
 If the script is run with parameter the config file of bird (e.g. `./bogons-sync-ripe.sh bird.conf`),
-it checks if the configuration file exists in te default path `/etc/bird/bird.conf`, an applies the outpout in the form of filters.
+it checks if the configuration file exists in the default path `/etc/bird/bird.conf`, and applies the outpout in the form of filters.
 
 ## Cron
 
