@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
 
-### USER CONFIGURABLE DATA
-
-# Put here any custom ipv4 prefixes you want to append to the output files
-# The format must be an array, e.g:
-# MY_IPV4_PREFIXES=("0.0.0.0/8" "10.0.0.0/8")
-# If you don't have any prefixes of your own, please leave the array declared
-# and empty
-
-MY_IPV4_PREFIXES=()
-
-
-# Put here any custom ipv6 prefixes you want to append to the output files
-# The format must be an array, e.g:
-# MY_IPV6_PREFIXES=("::/8" "0100::/64" "2001:2::/48")
-# If you don't have any prefixes of your own, please leave the array declared
-# and empty
-
-MY_IPV6_PREFIXES=()
-
 function atoi() {
 	IP=$1; IPNUM=0
 	for (( i=0 ; i<4 ; ++i )); do
@@ -140,11 +121,6 @@ if [[ -f "./backups/nro-delegated-stats-${CURRDATE}.txt" ]]; then
 
  iprange --merge ./ipv4-ranges-ripe.txt >| ./ipv4-cidr-merged-ripe.txt
 
- # appending my IPv4 prefixes, if any
- for prefix in ${MY_IPV4_PREFIXES[@]}; do
-	echo "${prefix}" >> ./ipv4-cidr-merged-ripe.txt
- done
-
  # unifying
  cat ./ipv4-cidr-merged-ripe.txt | sort | uniq >| ./ipv4-cidr-merged-ripe-sorted.txt
 
@@ -154,11 +130,6 @@ if [[ -f "./backups/nro-delegated-stats-${CURRDATE}.txt" ]]; then
  # IPV6 extracting, converting and merging/compacting to ::/cidr format
  echo -n "[${CURRDATE}] Sorting IPv6 prefixes..."
  grep "|ipv6|" ./backups/fullbogons-ip-ripe-${CURRDATE}.txt |grep -E "\|reserved\||\|available\|"| gawk -F "|" '{print $4"/"$5}' >| ./ipv6-cidr-merged-ripe.txt
-
- # appending my IPv6 prefixes, if any
- for prefix in ${MY_IPV6_PREFIXES[@]}; do
-	echo "${prefix}" >> ./ipv6-cidr-merged-ripe.txt
- done
 
  # unifying
  cat ./ipv6-cidr-merged-ripe.txt | sort | uniq >| ./ipv6-cidr-merged-ripe-sorted.txt
