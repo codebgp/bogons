@@ -18,7 +18,7 @@ it checks if the configuration file exists in the default path `/etc/bird/bird.c
 
 ## Cron
 
-A cronjob that runs every hour, with script outputs appended to a log file):
+A cronjob that runs every hour, with script outputs appended to a log file:
 
 ```
 0 * * * * /root/bogons-sync-ripe/bogons_sync-ripe.sh bird.conf | tee -a /root/bogons-sync-ripe/output.log 2>&1 2>>/root/bogons-sync-ripe/bogons_sync-ripe.err 1>/dev/null
@@ -49,4 +49,4 @@ define BOGON_PREFIXES_V6 = [];
  
 Feel free to raise a PR with any improvements/additions! :)
 
-Paterakis E. Ioannis (jpat@codebgp.com) and Lefteris Manassakis (lefteris@codebgp.com), CodeBGP.
+Ioannis E. Paterakis (jpat@codebgp.com) and Lefteris Manassakis (lefteris@codebgp.com), CodeBGP.
